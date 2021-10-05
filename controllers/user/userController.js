@@ -56,6 +56,7 @@ const obtenerUsuario = async (req, res) => {
 }
 
 const actualizarUser = async(req, res) => {
+
     const {id} = req.params;
     //lado izquierdo se excluye del lado derecho se incluye
     const { _id, ...argumentosRestantes } = req.body;
@@ -81,6 +82,7 @@ const actualizarUser = async(req, res) => {
 
 
 const actualizarIMG = async(req, res) => {
+    
     const id = req.params;
     const { archivo } = req.files;
     // validacion de extencion
@@ -92,21 +94,13 @@ const actualizarIMG = async(req, res) => {
             msg: 'la imagen no es del formato correcto'
         })
     }
-   
-    try {
-        const {secure_url} = await cloudinary.uploader.upload(archivo.tempFilePath, { folder: "/login" });
-        await Usuario.findOneAndUpdate(id, {img: secure_url});
+ 
+     const {secure_url} = await cloudinary.uploader.upload(archivo.tempFilePath, { folder: "/login" });
+     await Usuario.findOneAndUpdate(id, {img: secure_url});
         res-status(200).json({
             msg: 'La imagem se actualizo con exito'
-        })
+        });
 
-    } catch (error) {
-        res.status(400).json({
-            msg: 'No se guardo la imagen revisa con el adm'
-        })
-    }
- 
-    
 }
 
 module.exports = {
