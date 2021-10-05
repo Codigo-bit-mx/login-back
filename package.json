@@ -4,6 +4,7 @@
   "description": "back para la aplicacion login",
   "main": "index.js",
   "scripts": {
+    "start": "node app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ossmar Gonzalez",
