@@ -60,7 +60,7 @@ const googleIN = async(req, res) => {
         await usuario.save()
         }
 
-        if(usuario.estado === false){
+        if(usuario.estado === false) {
             res.status(400).json({
                 msg: 'El usuario no existe'
             })

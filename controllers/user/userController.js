@@ -27,7 +27,9 @@ const newUsuario = async (req = request, res = response) => {
             token,
             usuario });
     }catch(error){
-        res.status(400).json({msg: "endpoint caido comunicate con el admin"});
+        res.status(400).json({
+            msg: "No se realizo la operación"
+        });
     }
 }
 
@@ -57,12 +59,12 @@ const obtenerUsuario = async (req, res) => {
 
 const actualizarUser = async(req, res) => {
 
-    const {id} = req.params;
+    const { id } = req.params;
     //lado izquierdo se excluye del lado derecho se incluye
     const { _id, ...argumentosRestantes } = req.body;
    
     try {
-        let usuario =  await Usuario.findById(id);
+        let usuario = await Usuario.findById(id);
         if(!usuario){
             res.status(400).json({
                 msg: 'El usuario no existe'
@@ -75,7 +77,7 @@ const actualizarUser = async(req, res) => {
     
     } catch (error) {
         res.status(400).json({
-            msg:"Este endpoint falla comunicate con el admin"
+            msg:"No se realizo la operación"
         })
     }    
 }
@@ -97,7 +99,7 @@ const actualizarIMG = async(req, res) => {
  
      const {secure_url} = await cloudinary.uploader.upload(archivo.tempFilePath, { folder: "/login" });
      await Usuario.findOneAndUpdate(id, {img: secure_url});
-        res-status(200).json({
+        res.status(200).json({
             msg: 'La imagem se actualizo con exito'
         });
 
